@@ -8,7 +8,7 @@
 {
   "action": "water",
   "data": {
-    "state": "1"
+  "state": "1"
   }
 }
 
