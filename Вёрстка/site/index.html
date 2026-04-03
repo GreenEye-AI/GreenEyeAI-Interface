@@ -112,21 +112,56 @@
         </div>
       </div>
 
-      <!-- ВОДА -->
+      <!-- ВОДА (без распрыскивания) -->
       <div id="water" class="section">
-        <div class="water-grid">
-          <div class="water-card">
-            <h3>Уровень воды в баке</h3>
-            <div class="water-level">74%</div>
-            <progress value="74" max="100"></progress>
-            <p style="margin-top: 20px;">Осталось ~ 180 литров</p>
+        <div class="irrigation-container">
+          <div class="irrigation-header">
+            <h2>Управление поливом</h2>
           </div>
-          <div class="water-card">
-            <h3>График полива</h3>
-            <div class="schedule-item"><strong>08:00</strong> – 15 мин (стеллаж A)</div>
-            <div class="schedule-item"><strong>14:00</strong> – 20 мин (стеллаж B)</div>
-            <div class="schedule-item"><strong>19:30</strong> – 10 мин (стеллаж C)</div>
-            <button class="add-btn" style="width:100%; margin-top: 24px;">редактировать расписание</button>
+          <div class="irrigation-grid">
+            <!-- График полива 495×365 -->
+            <div class="irrigation-card schedule-card" style="width: 495px; height: 365px;">
+              <h3>График полива</h3>
+              <div class="schedule-list">
+                <div class="schedule-time">08:00 — 15 мин (стеллаж A)</div>
+                <div class="schedule-time">14:00 — 20 мин (стеллаж B)</div>
+                <div class="schedule-time">19:30 — 10 мин (стеллаж C)</div>
+              </div>
+            </div>
+
+            <!-- Настройка по времени 531×250 -->
+            <div class="irrigation-card time-card" style="width: 531px; height: 250px;">
+              <h3>Настройка по времени</h3>
+              <div class="time-control">
+                <div class="time-row">
+                  <label>Время начала:</label>
+                  <input type="time" value="08:00">
+                </div>
+                <div class="time-row">
+                  <label>Длительность (мин):</label>
+                  <input type="number" value="15" min="0" max="120">
+                </div>
+                <div class="time-row">
+                  <label>Повторять каждый день:</label>
+                  <input type="checkbox">
+                </div>
+                <button class="add-btn small">Сохранить</button>
+              </div>
+            </div>
+
+            <!-- Температура воды + pH 479×325 -->
+            <div class="irrigation-card water-temp-card" style="width: 479px; height: 325px;">
+              <h3>Температура воды</h3>
+              <div class="temp-value">22.5 °C</div>
+              <div class="temp-hint">оптимально: 20–24 °C</div>
+              <progress value="65" max="100" style="margin-top: 20px;"></progress>
+              <div class="temp-status">Норма</div>
+              <div class="ph-compact">
+                <span class="ph-label">pH почвы:</span>
+                <span class="ph-value">6.2</span>
+                <span class="ph-hint">(идеально 6.0–6.8)</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -183,77 +218,11 @@
         </div>
       </div>
     </div>
-
-    <!-- ПОЛИВ – третья страница (после камер) -->
-    <div class="irrigation-section">
-      <div class="irrigation-container">
-        <div class="irrigation-header">
-          <h2>Управление поливом</h2>
-        </div>
-        <div class="irrigation-grid">
-          <!-- Распрыскивание 479×130 -->
-          <div class="irrigation-card sprinkler-card" style="width: 479px; height: 130px;">
-            <div class="sprinkler-toggle">
-              <span>Распрыскивание</span>
-              <label class="switch">
-                <input type="checkbox" id="sprinklerSwitch">
-                <span class="slider"></span>
-              </label>
-            </div>
-          </div>
-
-          <!-- График полива 495×365 -->
-          <div class="irrigation-card schedule-card" style="width: 495px; height: 365px;">
-            <h3>График полива</h3>
-            <div class="schedule-list">
-              <div class="schedule-time">08:00 — 15 мин (стеллаж A)</div>
-              <div class="schedule-time">14:00 — 20 мин (стеллаж B)</div>
-              <div class="schedule-time">19:30 — 10 мин (стеллаж C)</div>
-            </div>
-          </div>
-
-          <!-- Настройка по времени 531×250 -->
-          <div class="irrigation-card time-card" style="width: 531px; height: 250px;">
-            <h3>Настройка по времени</h3>
-            <div class="time-control">
-              <div class="time-row">
-                <label>Время начала:</label>
-                <input type="time" value="08:00">
-              </div>
-              <div class="time-row">
-                <label>Длительность (мин):</label>
-                <input type="number" value="15" min="0" max="120">
-              </div>
-              <div class="time-row">
-                <label>Повторять каждый день:</label>
-                <input type="checkbox">
-              </div>
-              <button class="add-btn small">Сохранить</button>
-            </div>
-          </div>
-
-          <!-- Температура воды + pH (компактно) 479×325 -->
-          <div class="irrigation-card water-temp-card" style="width: 479px; height: 325px;">
-            <h3>Температура воды</h3>
-            <div class="temp-value">22.5 °C</div>
-            <div class="temp-hint">оптимально: 20–24 °C</div>
-            <progress value="65" max="100" style="margin-top: 20px;"></progress>
-            <div class="temp-status">Норма</div>
-            <!-- Компактный индикатор pH -->
-            <div class="ph-compact">
-              <span class="ph-label">pH почвы:</span>
-              <span class="ph-value">6.2</span>
-              <span class="ph-hint">(идеально 6.0–6.8)</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
 
 <script>
-  // Переключение разделов
+  // Переключение разделов с плавной прокруткой
   const navItems = document.querySelectorAll('.nav-item');
   const sections = document.querySelectorAll('.section');
 
@@ -268,6 +237,8 @@
         item.classList.add('active');
       }
     });
+    // Плавная прокрутка к выбранному разделу
+    activeSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   navItems.forEach(item => {
@@ -283,14 +254,6 @@
   if (waterToggle && waterStateSpan) {
     waterToggle.addEventListener('change', () => {
       waterStateSpan.textContent = waterToggle.checked ? 'Включён' : 'Отключён';
-    });
-  }
-
-  // Переключатель распрыскивания (для демонстрации)
-  const sprinklerSwitch = document.getElementById('sprinklerSwitch');
-  if (sprinklerSwitch) {
-    sprinklerSwitch.addEventListener('change', () => {
-      console.log('Распрыскивание:', sprinklerSwitch.checked ? 'вкл' : 'выкл');
     });
   }
 </script>
